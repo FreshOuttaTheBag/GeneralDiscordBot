@@ -327,7 +327,7 @@ if __name__ == "__main__":
     RPSChoices = ['rock','paper','scissors']
     client = discord.Client()
     TOKEN = ''
-    GUILD = 'Flappjackers'
+    GUILD = ''
     leagueRoles = ['Jungle','Support','Bottom','Top','Mid']
     magicResponces = [ 'As I see it, yes.',
                      'Ask again later.',
