@@ -1,0 +1,23 @@
+$new [Playlist Name][search 1][search 2][search 3]...
+Type the name of the playlist and all the searches associated with that playlist between brackets. 
+Ex: $new [Corey's New Playlist][Holding Out For a Hero Bonnie Tyler][Mo' Momo Lucky Chops]
+
+$append [Playlist Name][search 1][search 2][search 3]...
+Append searches to a previously existing playlist
+
+$cat [Playlist Name 1][Playlist Name 2]...
+Adds the contents of each playlist to the end of the first playlist. (Short for concatenate)
+
+$list
+Lists all playlists (and all playlist authors if I get to that ;P)
+
+$listfrom [Playlist Name]
+Lists all searches within a playlist
+
+$delete [Playlist Name]
+Deletes a playlist
+
+$removefrom [PlaylistName][Search1][Search2][Search3]...
+removes the specified search from the playlist
+
+

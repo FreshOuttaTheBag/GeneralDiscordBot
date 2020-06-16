@@ -1,0 +1,52 @@
+$choose
+Choose from a list. If no list is given, will choose a random member from the chooser's voice chat.
+Define a list like so: $choose Apples Oranges Grapes
+
+$coinflip
+Picks heads or tails
+
+$chooseLeagueRoles
+Assigns the players of the chooser's voice chat to League roles. Can also assign listed members to
+League roles, just like $choose
+
+$roll Number
+picks a number from 1-Number, or just use $roll to roll from 1-6
+
+$suggest
+Anything after the command is written to a suggestions file
+
+$commands
+shows a list of commands and what they do
+
+$cockrate
+Rates your cock. Your cock rating is tied to your unique discord ID, so what you get is what 
+you've got
+
+$cockcompare @User
+Compares your cock rating to another @User's cock rating, fun for the whole family!
+
+$8ball 
+Ask the magic 8ball a question
+
+$newPoll Name, Description, Choice1, Choice2, Choice3....
+Create a new poll, identified with "Name", described by "Description",
+choices users can vote on are delimited by commas after the description.
+NOTE: You CANNOT use commas in the description, as they seperate the description
+from the choices. Feel free to use ";" ":" and "."
+
+$pollChoices PollName
+Shows the name, description, and choices of the Poll with the name "PollName"
+
+$vote PollName
+Vote on a choice in the Poll with the name "PollName"
+
+$closepoll PollName
+Closes the Poll with the name "PollName" and shows the results of that pole.
+After a Poll is closed, its results and details are no longer accessible
+
+$polls
+Lists all open polls
+
+$rockpaperscissors @User
+Challenge @User to a game of Rock Paper Scissors!
+
