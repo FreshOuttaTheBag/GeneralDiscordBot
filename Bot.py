@@ -214,7 +214,7 @@ class Client(discord.Client):
     async def suggestion(self,message):
         #write suggestion to file
         try:
-            f = open("/docs/suggestions.txt","a")
+            f = open("docs/suggestions.txt","a")
             sugg = message.content[9:] + "\n"
             f.write(sugg)
             f.close()
@@ -350,7 +350,7 @@ if __name__ == "__main__":
                      'Yes – definitely.',
                      'You may rely on it.'
                     ]
-    conn = sqlite3.connect('/db/Data.db')
+    conn = sqlite3.connect('db/Data.db')
     c = conn.cursor()
     
 
