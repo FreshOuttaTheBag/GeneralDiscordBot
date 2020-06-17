@@ -13,7 +13,7 @@ class Poll:
         self.membersWhoVoted = []
         self.comment = comment
 
-        
+
 class RockPaperScissors:
     #dto, could be replaced with a dict but meh
     def __init__(self,challenger,challenged,channel):
@@ -29,24 +29,21 @@ class Client(discord.Client):
         super().__init__()
         self.Polls = []
         self.Games = {'RockPaperScissors' : []}
-        #self.inPlaylistMode = False #I would use finite state, but other people using the bot relies on not having finite state
-    
+
     async def on_ready(self):
         #basically __init__
         print(str(client.user) + ' has connected to Discord!')
-        guild = discord.utils.get(client.guilds, name=GUILD)
-        print(guild.name + " " + str(guild.id))        
 
     async def on_message(self,message):
         #when a message is recieved
         if message.author != self.user and len(message.content) > 0 and message.content[0] == '$':
             command = message.content.split(' ',1)[0].lower()
             self.loop.create_task(self.execute_command(command,message))
-        else:           
+        else:
             for rps in self.Games["RockPaperScissors"]:
                 if (message.author == rps.p1 or message.author == rps.p2) and any(x == message.content.lower() for x in RPSChoices):
                     self.loop.create_task(self.handleRPS(message))
-                    
+
     async def execute_command(self,command,message):
         commands = {
                 '$choose' : self.chooseFromList,
@@ -71,9 +68,9 @@ class Client(discord.Client):
         res = commands.get(command)
         self.loop.create_task(res(message))
 
-    async def playlist(self,message):        
+    async def playlist(self,message):
         musicClient = MusicClient(message,TOKEN,conn)
-        
+
     async def showInventory(self,message):
         c.execute("SELECT Item,Quantity FROM Inventory WHERE MemberID = ?",(message.author.id,))
         msg = "You own: \n"
@@ -121,10 +118,10 @@ class Client(discord.Client):
                     winner = game.p2
                 elif game.p2Response == "paper":
                     winner = game.p1
-            
+
             await game.channel.send(game.p1.name + " chose " + game.p1Response + " " + game.p2.name + " chose " + game.p2Response + "\n" + winner.name + " wins!")
             self.Games['RockPaperScissors'].remove(game)
-        
+
 
     async def listPolls(self,message):
         msg = "All open polls:\n"
@@ -134,7 +131,7 @@ class Client(discord.Client):
 
     async def showPollChoices(self,message):
         name = message.content.split(' ',1)[1].strip()
-        if any(x.name == name for x in self.Polls):               
+        if any(x.name == name for x in self.Polls):
             poll = next(filter(lambda x: x.name == name,  self.Polls))
             msg = poll.name + "\n\n" + poll.comment + "\n"
             msg += "\nChoices for %s:\n"%name
@@ -163,7 +160,7 @@ class Client(discord.Client):
                 await message.channel.send("You've already voted in this poll!")
         else:
             await message.channel.send('Poll "%s" not found, or does not exist'%name)
-            
+
     async def createNewPoll(self,message):
         poll = message.content.split(' ',1)[1:][0]
         poll = poll.split(',')
@@ -192,7 +189,7 @@ class Client(discord.Client):
             self.Polls.remove(poll)
         else:
             await message.channel.send('Poll "%s" not found, or does not exist'%name)
-            
+
 
     async def magicResponse(self,message):
         await message.channel.send(ran.choice(magicResponces))
@@ -201,9 +198,9 @@ class Client(discord.Client):
         f = open('/docs /commands.txt','r')
         await message.channel.send(f.read())
         f.close()
-        
+
     async def chooseFromList(self,message):
-        #chooses a value from a given list        
+        #chooses a value from a given list
         players = message.content.split(' ')
         if len(players) > 1:
             players = players[1:]
@@ -221,7 +218,7 @@ class Client(discord.Client):
         except:
             await message.channel.send("Woah there bud, I ran into an error!")
         return
-    
+
     async def coinFlip(self,message):
         #send heads or tails
         r = randint(0,1)
@@ -233,11 +230,11 @@ class Client(discord.Client):
 
     async def leagueRoles(self,message):
         #if 5 players are given
-        if len(message.content.split(' ')) > 1:            
+        if len(message.content.split(' ')) > 1:
             players = message.content.split(' ')[1:]
         else:
             players = self.getPlayersInVoiceChannel(message)
-            
+
         ran.shuffle(leagueRoles)
         ran.shuffle(players)
         roles = dict(zip(leagueRoles,players))
@@ -245,7 +242,7 @@ class Client(discord.Client):
         for x in roles:
             res += x + ": " + roles[x] + "\n"
         await message.channel.send(res)
-            
+
     async def diceRoll(self,message):
         #send a value from 0 to rng
         rng = 6
@@ -254,10 +251,10 @@ class Client(discord.Client):
         except:
             print("Error parsing number after roll")
             pass
-        await message.channel.send(ran.randint(1,rng))         
+        await message.channel.send(ran.randint(1,rng))
 
     def getPlayersInVoiceChannel(self,message):
-        members = [c.members for c in message.guild.channels if (c.type == discord.ChannelType.voice and message.author in c.members)]
+        members = [i.members for i in message.guild.channels if (i.type == discord.ChannelType.voice and message.author in i.members)]
         if len(members) > 0:
             members = members[0]
             names = [m.name for m in members]
@@ -310,8 +307,8 @@ class Client(discord.Client):
             return
         r1 = r1[0][0]
         r2 = r2[0][0]
-        
-        
+
+
         res = ""
         if r1 == r2:
             res = "I can barely tell the two cocks apart!"
@@ -327,7 +324,6 @@ if __name__ == "__main__":
     RPSChoices = ['rock','paper','scissors']
     client = discord.Client()
     TOKEN = ''
-    GUILD = ''
     leagueRoles = ['Jungle','Support','Bottom','Top','Mid']
     magicResponces = [ 'As I see it, yes.',
                      'Ask again later.',
@@ -352,9 +348,7 @@ if __name__ == "__main__":
                     ]
     conn = sqlite3.connect('db/Data.db')
     c = conn.cursor()
-    
+
 
     client = Client()
     client.run(TOKEN)
-    
-        
