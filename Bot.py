@@ -4,6 +4,7 @@ from random import *
 import discord
 import sqlite3
 from MusicClient import MusicClient
+import TokenGetter.getToken
 
 class Poll:
     #dto, could be replaced with a dict but meh
@@ -323,7 +324,7 @@ class Client(discord.Client):
 if __name__ == "__main__":
     RPSChoices = ['rock','paper','scissors']
     client = discord.Client()
-    TOKEN = ''
+    TOKEN = getToken()
     leagueRoles = ['Jungle','Support','Bottom','Top','Mid']
     magicResponces = [ 'As I see it, yes.',
                      'Ask again later.',
